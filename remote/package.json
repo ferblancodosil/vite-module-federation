@@ -5,8 +5,10 @@
   "scripts": {
     "dev": "run-p vite:dev force-vite-restart",
     "vite:dev": "vite --port 4174",
-    "build": "run-p type-check build-only",
-    "preview": "nohup vite preview --port 4174 &",
+    "build-with-replacement": "npm run build && npm run replacement-env mode=production",
+    "replacement-env": "node ../shared/replacement-federation-env.js",
+    "build": "run-p type-check build-only && npm run replacement-env mode=production",
+    "preview": "npm run build && vite preview --port 4174",
     "build-only": "vite build",
     "type-check": "vue-tsc --noEmit",
     "lint": "eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --fix --ignore-path .gitignore",
@@ -17,6 +19,8 @@
     "vue": "^3.2.45"
   },
   "devDependencies": {
+    "@import-meta-env/cli": "^0.5.5",
+    "@import-meta-env/unplugin": "^0.4.7",
     "@module-federation/vite": "^0.2.6",
     "@rushstack/eslint-patch": "^1.1.4",
     "@softarc/native-federation-esbuild": "1.1.1",

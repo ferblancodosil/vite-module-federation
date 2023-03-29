@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import Counter from "./components/Counter.vue";
 import { state } from "shared";
+import enviroment from "./enviroment";
 console.log("remote got message:", state.message);
+console.info("VITE_EXAMPLE", enviroment.VITE_EXAMPLE);
 console.info("VITE_EXAMPLE", import.meta.env.VITE_EXAMPLE);
 </script>
 
